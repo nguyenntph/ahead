@@ -8,6 +8,9 @@ class Ahead extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Ahead - Budgeting that works',
+        theme: ThemeData(
+            primaryColor: Colors.red,
+        ),
         home: RandomWords()
     );
   }
