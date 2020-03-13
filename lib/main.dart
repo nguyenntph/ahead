@@ -15,6 +15,7 @@ class Ahead extends StatelessWidget {
 
 class RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
+  final _saved = Set<WordPair>();
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
@@ -43,11 +44,26 @@ class RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildRow(WordPair pair) {
+    final bool saved = _saved.contains(pair);
+
     return ListTile(
         title: Text(
             pair.asPascalCase,
             style: _biggerFont
-        )
+        ),
+        trailing: Icon(
+            saved ? Icons.favorite : Icons.favorite_border,
+            color: saved ? Colors.red : Colors.blue
+        ),
+        onTap: () {
+          setState(() {
+            if (saved) {
+              _saved.remove(pair);
+            } else {
+              _saved.add(pair);
+            }
+          });
+        }
     );
   }
 }
